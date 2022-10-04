@@ -1,6 +1,9 @@
 import react, { useState } from "react";
 import { View, Text, ImageBackground, TextInput } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import styles from "./Styles";
+
+import config from "../../../config/config.json";
 
 import Logo from "../../components/Logo/Logo";
 import ButtonLogin from "../../components/ButtonLogin/ButtonLogin";
@@ -13,6 +16,13 @@ function SingIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showElement, setShowElement] = useState(false);
+
+  const navigation = useNavigation();
+
+  function handleRegister() {
+    navigation.navigate("Register");
+  }
+  async function handleLogin() {}
 
   return (
     <ImageBackground source={image} style={styles.backgroundStyle}>
@@ -34,11 +44,11 @@ function SingIn() {
           value={password}
           onChangeText={(value) => setPassword(value)}
           secureTextEntry={true}
-          icon={<Text>Show</Text>}
-          iconPosition="right"
         ></TextInput>
 
-        <Text style={styles.forwardPassword}>Esqueceu sua senha?</Text>
+        <Text style={styles.forwardPassword} >
+          Esqueceu sua senha?
+        </Text>
         {showElement ? (
           <Text style={styles.forwardPassword}>
             {" "}
@@ -48,6 +58,7 @@ function SingIn() {
       </View>
       <View style={styles.buttonsView}>
         <ButtonLogin text={"Entrar"} />
+        <ButtonLogin text={"Registe-se"} onPress={handleRegister}/>
       </View>
     </ImageBackground>
   );
