@@ -10,6 +10,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //Routes
+app.get('/auth', async (req, res) => {
+    let reqs = await model.User.find({
+        email: req.body.email,
+    });
+    if(reqs){
+        res.send(JSON.stringify('Usuário encontrado'));
+    }
+});
+
 app.post('/create', async (req, res)=>{
     let reqs = await model.User.create({
         'name': req.body.nameUser,

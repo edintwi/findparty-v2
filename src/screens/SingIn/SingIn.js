@@ -22,7 +22,21 @@ function SingIn() {
   function handleRegister() {
     navigation.navigate("Register");
   }
-  async function handleLogin() {}
+  async function handleLogin(email, password) {
+    let req = await fetch(config.urlRootNode + 'auth',{
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+
+    let res = await req.JSON(); 
+  }
 
   return (
     <ImageBackground source={image} style={styles.backgroundStyle}>
@@ -57,7 +71,7 @@ function SingIn() {
         ) : null}
       </View>
       <View style={styles.buttonsView}>
-        <ButtonLogin text={"Entrar"} />
+        <ButtonLogin text={"Entrar"} onPress={handleLogin}/>
         <ButtonLogin text={"Registe-se"} onPress={handleRegister}/>
       </View>
     </ImageBackground>

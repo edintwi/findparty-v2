@@ -44,7 +44,7 @@ const Register = () => {
     let ress = await reqs.JSON();
   }
 
-  // -- VALIDAÇÃO DE VALIDAÇÃO DO FORMULÁRIO
+  // -- VALIDAÇÃO DO FORMULÁRIO
   const handleNewAcount = () => {
     if (
       userName != null &&
