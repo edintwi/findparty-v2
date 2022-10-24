@@ -13,6 +13,7 @@ import {
   Poppins_400Regular,
 } from "@expo-google-fonts/poppins";
 
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Ranga_400Regular,
