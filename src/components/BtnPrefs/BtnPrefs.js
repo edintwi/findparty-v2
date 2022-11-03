@@ -6,9 +6,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './Styles';
 
 
-function BtnPrefs ( {onPress, name, icon}) {
+function BtnPrefs ( {name, icon, onPress}) {
     return (
-        <TouchableOpacity style={styles.container}  onPress={onPress}>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
             <Icon name={icon} size={40} color='black' />
             <Text style={styles.btnText}>
                 {name}

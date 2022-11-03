@@ -1,32 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
-import styles from "./Styles";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import React from "react";
+import { useState, useEffect } from "react";
+import { View, Text, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 import { BigHead } from "react-native-bigheads";
 import Swiper from "react-native-deck-swiper";
 import BtnPrefs from "../../components/BtnPrefs/BtnPrefs";
-import data from "../../../data";
 
-const Card = ({ card }) => (
-    <View style={styles.card}>
-      <Image source={{ uri: card.image }} style={styles.cardImg} />
-    </View>
-);
-function Home() {
-  const [index, setIndex] = React.useState(0);
-  const onSwiped = () => {
-    setIndex(index + 1);
-  }
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import data from "../../../data";
+import styles from "./Styles";
+
+const Home = () => {
+  const navigation = useNavigation();
+
   const [preferenceSelected, setPreferenceSelected] = useState("");
   const [list, setList] = useState(data);
 
-  useEffect(() => {
+  const filterData = () => {
     if (preferenceSelected === "") {
       setList(data);
     } else {
       setList(
-        data.filter(item => {
+        data.filter((item) => {
           if (item.categoria === preferenceSelected) {
+            console.log(list);
             return true;
           } else {
             return false;
@@ -34,12 +32,16 @@ function Home() {
         })
       );
     }
+  };
+  
+  useEffect(() => {
+    filterData();
   }, [preferenceSelected]);
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity>  
+        <TouchableOpacity>
           <Icon name="logout" size={40} color="#000" style={styles.logoutBtn} />
         </TouchableOpacity>
 
@@ -54,20 +56,37 @@ function Home() {
       <View style={styles.EventCards}>
         <Swiper
           cards={list}
-          cardIndex={index}
-          onSwiper={onSwiped}
+          renderCard={(card) => {
+            if (card != null) {
+              return (
+                <TouchableOpacity
+                  style={styles.card}
+                  onPress={() => {
+                    navigation.navigate("EventProfile", {
+                      id: card.id,
+                      nome: card.nome,
+                      categoria: card.categoria,
+                      image: card.image,
+                      avaliacao: card.avaliacao,
+                    });
+                  }}
+                >
+                  <Image source={{ uri: card.image }} style={styles.cardImg} />
+                </TouchableOpacity>
+              );
+            }
+          }}
           stackSize={4}
-          stackSeparation={10   }
+          stackSeparation={10}
           disableBottomSwipe
           disableTopSwipe
           verticalSwipe={false}
           backgroundColor={"transparent"}
-          renderCard={(card) => <Card card={card} />}
+          keyExtractor={(card) => card.id}
         ></Swiper>
       </View>
-
-      <ScrollView style={styles.buttonsPrefs} horizontal={true}>
-      <BtnPrefs
+      <View style={styles.buttonsPrefs}>
+        <BtnPrefs
           icon="wine"
           name="Todos"
           onPress={() => setPreferenceSelected("")}
@@ -87,8 +106,9 @@ function Home() {
           name="Show"
           onPress={() => setPreferenceSelected("Show")}
         />
-      </ScrollView>
+      </View>
     </View>
   );
-}
+};
+
 export default Home;

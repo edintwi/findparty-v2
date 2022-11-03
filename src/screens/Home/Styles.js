@@ -43,16 +43,11 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%'
     },
-    cardName:{
-        color: 'white',
-        fontFamily: "Poppins_600SemiBold",
-        marginTop: 10
-    },
     buttonsPrefs:{
         alignSelf: 'center',
-        flex: 0.35,
         flexDirection: 'row',
-        marginTop: 40
+        flex: 1,
+        marginTop: 20
     }
 });
 
