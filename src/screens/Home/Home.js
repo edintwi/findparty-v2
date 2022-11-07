@@ -13,6 +13,7 @@ import * as Location from "expo-location";
 import { BigHead } from "react-native-bigheads";
 import Swiper from "react-native-deck-swiper";
 import BtnPrefs from "../../components/BtnPrefs/BtnPrefs";
+import NoEventsCard from "../../components/NoEventsCard";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import data from "../../../data";
@@ -152,9 +153,12 @@ const Home = () => {
                   <Image source={{ uri: card.image }} style={styles.cardImg} />
                 </TouchableOpacity>
               );
+            }else {
+              return(
+                <NoEventsCard/>
+              )
             }
           }}
-          stackSize={4}
           stackSeparation={10}
           disableBottomSwipe
           disableTopSwipe
