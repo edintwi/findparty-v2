@@ -1,7 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import * as Location from "expo-location";
 
 import { BigHead } from "react-native-bigheads";
 import Swiper from "react-native-deck-swiper";
@@ -14,16 +21,42 @@ import styles from "./Styles";
 const Home = () => {
   const navigation = useNavigation();
 
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
   const [preferenceSelected, setPreferenceSelected] = useState("");
   const [list, setList] = useState(data);
 
+  let userDistancePreference = 10;
+
   const filterData = () => {
     if (preferenceSelected === "") {
-      setList(data);
+      setList(
+        data.filter((item) => {
+          const distance = getDistanceFromLatLonInKm(
+            userLatitude,
+            userLongitude,
+            item.latitude,
+            item.longitude
+          );
+          if (distance <= userDistancePreference) {
+            return true;
+          }
+        })
+      );
     } else {
       setList(
         data.filter((item) => {
-          if (item.categoria === preferenceSelected) {
+          const distance = getDistanceFromLatLonInKm(
+            userLatitude,
+            userLongitude,
+            item.latitude,
+            item.longitude
+          );
+          if (
+            item.categoria === preferenceSelected &&
+            distance <= userDistancePreference
+          ) {
             console.log(list);
             return true;
           } else {
@@ -33,13 +66,58 @@ const Home = () => {
       );
     }
   };
-  
+
   useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status != "granted") {
+        setErrorMsg("Permissão de acesso a localização negada");
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  let text = "waiting";
+  if (errorMsg) {
+    text = errorMsg;
+    console.log(text);
+  } else if (location) {
+    text = location;
+    var userLatitude = text.coords.latitude;
+    var userLongitude = text.coords.longitude;
+
+    console.log("latitude: " + userLatitude);
+    console.log("longitude: " + userLongitude);
+  }
+
+  function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+    //calculando a distancia entre dois pontos
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2 - lat1); // deg2rad below
+    var dLon = deg2rad(lon2 - lon1);
+    var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(deg2rad(lat1)) *
+        Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in km
+    return d;
+  }
+
+  function deg2rad(deg) {
+    return deg * (Math.PI / 180);
+  }
+  useEffect(() => {
+    //filtrando resultados por categoria
     filterData();
-  }, [preferenceSelected]);
+  }, [preferenceSelected, location]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity>
           <Icon name="logout" size={40} color="#000" style={styles.logoutBtn} />
@@ -107,7 +185,7 @@ const Home = () => {
           onPress={() => setPreferenceSelected("Show")}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

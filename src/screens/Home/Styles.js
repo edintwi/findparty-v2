@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     headerText:{
         textAlign: 'center',
         fontFamily: "Poppins_600SemiBold",
-        fontSize: 14,
+        fontSize: 15,
         marginTop: 20,
     },
     userAvatar:{

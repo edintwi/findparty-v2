@@ -15,8 +15,8 @@ const AuthRoutes = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="SingIn" component={SingIn} />
+      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="EventProfile" component={EventProfile} />
     </Stack.Navigator>

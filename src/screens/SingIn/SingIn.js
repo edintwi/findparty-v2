@@ -23,19 +23,7 @@ function SingIn() {
     navigation.navigate("Register");
   }
   async function handleLogin(email, password) {
-    let req = await fetch(config.urlRootNode + 'auth',{
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
-
-    let res = await req.JSON(); 
+    
   }
 
   return (
@@ -71,7 +59,7 @@ function SingIn() {
         ) : null}
       </View>
       <View style={styles.buttonsView}>
-        <ButtonLogin text={"Entrar"} onPress={handleLogin}/>
+        <ButtonLogin text={"Entrar"} onPress={navigation.navigate('Home')}/>
         <ButtonLogin text={"Registe-se"} onPress={handleRegister}/>
       </View>
     </ImageBackground>
