@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { View, Text, Image } from "react-native";
 import TopBar from "../../components/TopBar/TopBar";
 import EventBanner from "../../components/EventBanner/EventBanner";
@@ -7,6 +7,52 @@ import Icon from "react-native-vector-icons/Entypo";
 import ButtonNormal from "../../components/ButtonNormal/ButtonNormal";
 
 const EventProfile = ({ route }) => {
+  let id = route.params?.id;
+  let nome = route.params?.nome;
+  let image = route.params?.image;
+  let avaliacao = route.params?.avaliacao;
+  let endereco = route.params?.endereco;
+  let vendaingre = route.params?.vendaingre;
+  let date = route.params?.date;
+  let time = route.params?.time;
+
+  const Detalhes = () => {
+    return (
+      <View>
+         <Text> Detalhes </Text>
+      </View>
+    )
+  }
+  
+  const Fotos = () => {
+    return (
+      <View>
+         <Text> Fotos </Text>
+      </View>
+    )
+  }
+  
+  const Avaliacoes = () => {
+    return (
+      <View>
+         <Text> Avaliacoes </Text>
+      </View>
+    )
+  }
+
+  const [screnn, setScrenn] = useState('Detalhes');
+
+  const IsScrenn =() => {
+    if(screnn === 'Detalhes'){
+      return <Detalhes/>
+    }else if(screnn === 'Fotos'){
+      return <Fotos/>
+    }else if(screnn === 'Avaliacoes'){{
+      return <Avaliacoes/>
+    }}
+  }
+
+
   return (
     <View>
       <TopBar text="Evento" />
@@ -24,13 +70,13 @@ const EventProfile = ({ route }) => {
         </Icon>
       </View>
       <View style={styles.buttonView}>
-        <ButtonNormal text="Avaliações"/>
-        <ButtonNormal text="Fotos" />
-        <ButtonNormal text="Parceria"/>
+        <ButtonNormal text="Detalhes" onPress={() => setScrenn('Detalhes')}/>
+        <ButtonNormal text="Fotos" onPress={() => setScrenn('Fotos')}/>
+        <ButtonNormal text="Avaliações" onPress={() => setScrenn('Avaliacoes')}/>
       </View>
-      <View style={styles.textSobre}>
-        
-      </View>
+          <>
+           {IsScrenn()}
+          </>
     </View>
   );
 };

@@ -19,7 +19,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import data from "../../../data";
 import styles from "./Styles";
 
-const Home = () => {
+const Home = ({route}) => {
   const navigation = useNavigation();
 
   const [location, setLocation] = useState(null);
@@ -55,8 +55,8 @@ const Home = () => {
             item.longitude
           );
           if (
-            item.categoria === preferenceSelected &&
-            distance <= userDistancePreference
+            distance <= userDistancePreference &&
+            item.categoria === preferenceSelected
           ) {
             console.log(list);
             return true;
@@ -130,6 +130,9 @@ const Home = () => {
           bgShape="circle"
           size={50}
           showBackground={true}
+          onPress={() => navigation.navigate('UserConfig', {
+            userDistancePreference: userDistancePreference
+          })}
         />
       </View>
       <View style={styles.EventCards}>
@@ -147,6 +150,10 @@ const Home = () => {
                       categoria: card.categoria,
                       image: card.image,
                       avaliacao: card.avaliacao,
+                      endereco: card.endereco,
+                      vendaingre: card.vendaingre,
+                      date: card.date,
+                      time: card.time,
                     });
                   }}
                 >
@@ -159,17 +166,17 @@ const Home = () => {
               )
             }
           }}
+          stackSize={3}
           stackSeparation={10}
           disableBottomSwipe
           disableTopSwipe
           verticalSwipe={false}
           backgroundColor={"transparent"}
-          keyExtractor={(card) => card.id}
         ></Swiper>
       </View>
       <View style={styles.buttonsPrefs}>
         <BtnPrefs
-          icon="wine"
+          icon="checkbox"
           name="Todos"
           onPress={() => setPreferenceSelected("")}
         />

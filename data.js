@@ -7,7 +7,11 @@ export default data = [
       categoria: "Show",
       avaliacao: '4,5',
       latitude: 37.4220936,
-      longitude: -122.083922
+      longitude: -122.083922,
+      endereco: "Iaraqua 520",
+      vendaingre: "Lojas South",
+      date: "09/06/2022",
+      time: "17:00"
     },
     {
       id: "2",
@@ -16,8 +20,12 @@ export default data = [
         "https://img.freepik.com/vetores-gratis/banner-de-musica-de-festa-noturna-para-modelo-de-midia-social_17005-1357.jpg?w=2000",
       categoria: "Boate",
       avaliacao: '5,0',
-      latitude: 37.4220936,
-      longitude: -122.083922
+      latitude: -22.8765336,
+      longitude: -43.5405413,
+      endereco: "Iaraqua 520",
+      vendaingre: "Lojas South",
+      date: "09/06/2022",
+      time: "17:00"
     },
     {
       id: "3",
@@ -27,6 +35,10 @@ export default data = [
       categoria: "Bar",
       avaliacao: '3,5',
       latitude: -22.8765336,
-      longitude: -43.5405413
+      longitude: -43.5405413,
+      endereco: "Iaraqua 520",
+      vendaingre: "Lojas South",
+      date: "09/06/2022",
+      time: "17:00"
     },
   ];

@@ -5,7 +5,13 @@ const styles = StyleSheet.create({
         display:'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: '20%'
+        paddingTop: '20%',
+        backgroundColor: "#E9E9E9",
+        width: '100%',
+        flex: 3,
+        marginBottom: 170,
+        padding: 0,
+
     },
     text:{
         fontFamily: 'Poppins_600SemiBold', 
