@@ -1,10 +1,23 @@
+<<<<<<< Updated upstream
 import React, {useState, useEffect} from "react";
+=======
+import React, { useState, useEffect } from "react";
+>>>>>>> Stashed changes
 import { View, Text, Image } from "react-native";
 import TopBar from "../../components/TopBar/TopBar";
 import EventBanner from "../../components/EventBanner/EventBanner";
 import styles from "./Styles";
 import Icon from "react-native-vector-icons/Entypo";
 import ButtonNormal from "../../components/ButtonNormal/ButtonNormal";
+
+function useButton() {
+  const [screen, setScreen] = useState();
+  const handleClick = () => setScreen(screen);
+
+  useEffect(() => {
+    
+  });
+}
 
 const EventProfile = ({ route }) => {
   let id = route.params?.id;
@@ -70,9 +83,15 @@ const EventProfile = ({ route }) => {
         </Icon>
       </View>
       <View style={styles.buttonView}>
+<<<<<<< Updated upstream
         <ButtonNormal text="Detalhes" onPress={() => setScrenn('Detalhes')}/>
         <ButtonNormal text="Fotos" onPress={() => setScrenn('Fotos')}/>
         <ButtonNormal text="Avaliações" onPress={() => setScrenn('Avaliacoes')}/>
+=======
+        <ButtonNormal text="Avaliações" />
+        <ButtonNormal text="Fotos" />
+        <ButtonNormal text="Parceria" />
+>>>>>>> Stashed changes
       </View>
           <>
            {IsScrenn()}

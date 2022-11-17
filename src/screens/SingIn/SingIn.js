@@ -60,7 +60,7 @@ function SingIn() {
       </View>
       <View style={styles.buttonsView}>
         <ButtonLogin text={"Entrar"} onPress={navigation.navigate('Home')}/>
-        <ButtonLogin text={"Registe-se"} onPress={handleRegister}/>
+        <ButtonLogin text={"Registre-se"} onPress={handleRegister}/>
       </View>
     </ImageBackground>
   );
