@@ -32,18 +32,18 @@ const EventProfile = ({ route }) => {
         </View>
         <View style={styles.viewInfo}>
           <Icon name="user" size={15} style={styles.Icon}>
-            <Text style={styles.text}>Evento {route.params?.nome}</Text>
+            <Text style={styles.text}>Evento {nome}</Text>
           </Icon>
         </View>
         <View style={styles.viewInfo}>
           <Icon name="address" size={15} styles={styles.Icon}>
-            <Text style={styles.text}>{route.params?.endereco}</Text>
+            <Text style={styles.text}>{endereco}</Text>
           </Icon>
         </View>
         <View style={styles.viewInfo}>
           <Icon2 name="clock" size={15} styles={styles.Icon}>
             <Text style={styles.text}>
-              Começa as {route.params?.time} no dia {route.params?.date}
+              Começa as {time} no dia {date}
             </Text>
           </Icon2>
         </View>
