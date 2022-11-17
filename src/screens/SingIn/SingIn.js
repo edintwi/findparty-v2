@@ -22,9 +22,7 @@ function SingIn() {
   function handleRegister() {
     navigation.navigate("Register");
   }
-  async function handleLogin(email, password) {
-    
-  }
+  async function handleLogin(email, password) {}
 
   return (
     <ImageBackground source={image} style={styles.backgroundStyle}>
@@ -48,9 +46,7 @@ function SingIn() {
           secureTextEntry={true}
         ></TextInput>
 
-        <Text style={styles.forwardPassword} >
-          Esqueceu sua senha?
-        </Text>
+        <Text style={styles.forwardPassword}>Esqueceu sua senha?</Text>
         {showElement ? (
           <Text style={styles.forwardPassword}>
             {" "}
@@ -59,8 +55,8 @@ function SingIn() {
         ) : null}
       </View>
       <View style={styles.buttonsView}>
-        <ButtonLogin text={"Entrar"} onPress={navigation.navigate('Home')}/>
-        <ButtonLogin text={"Registre-se"} onPress={handleRegister}/>
+        <ButtonLogin text={"Entrar"} onPress={navigation.navigate("Home")} />
+        <ButtonLogin text={"Registre-se"} onPress={handleRegister} />
       </View>
     </ImageBackground>
   );
