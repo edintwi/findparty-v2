@@ -19,7 +19,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import data from "../../../data";
 import styles from "./Styles";
 
-const Home = ({route}) => {
+const Home = ({ route }) => {
   const navigation = useNavigation();
 
   const [location, setLocation] = useState(null);
@@ -130,9 +130,11 @@ const Home = ({route}) => {
           bgShape="circle"
           size={50}
           showBackground={true}
-          onPress={() => navigation.navigate('UserConfig', {
-            userDistancePreference: userDistancePreference
-          })}
+          onPress={() =>
+            navigation.navigate("UserConfig", {
+              userDistancePreference: userDistancePreference,
+            })
+          }
         />
       </View>
       <View style={styles.EventCards}>
@@ -154,16 +156,16 @@ const Home = ({route}) => {
                       vendaingre: card.vendaingre,
                       date: card.date,
                       time: card.time,
+                      description: card.description,
+                      pictures: card.pictures,
                     });
                   }}
                 >
                   <Image source={{ uri: card.image }} style={styles.cardImg} />
                 </TouchableOpacity>
               );
-            }else {
-              return(
-                <NoEventsCard/>
-              )
+            } else {
+              return <NoEventsCard />;
             }
           }}
           stackSize={3}

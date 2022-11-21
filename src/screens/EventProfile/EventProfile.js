@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, Image, Dimensions } from "react-native";
+import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
 import TopBar from "../../components/TopBar/TopBar";
 import EventBanner from "../../components/EventBanner/EventBanner";
 import styles from "./Styles";
@@ -7,7 +7,8 @@ import Icon from "react-native-vector-icons/Entypo";
 import Icon2 from "react-native-vector-icons/FontAwesome5";
 import Icon3 from "react-native-vector-icons/Ionicons";
 import ButtonNormal from "../../components/ButtonNormal/ButtonNormal";
-import Carousel, { ParallaxImage } from "react-native-snap-carousel";
+import { ScrollView } from "react-native";
+import { FlatList } from "react-native-web";
 
 const EventProfile = ({ route }) => {
   let id = route.params?.id;
@@ -18,6 +19,8 @@ const EventProfile = ({ route }) => {
   let vendaingre = route.params?.vendaingre;
   let date = route.params?.date;
   let time = route.params?.time;
+  let description = route.params?.description;
+  let pictures = route.params?.pictures;
 
   const Detalhes = () => {
     return (
@@ -55,28 +58,13 @@ const EventProfile = ({ route }) => {
           </Icon3>
         </View>
         <View>
-          <Text style={styles.textInfo}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </Text>
+          <Text style={styles.textInfo}> Está é a descrição {description}</Text>
         </View>
       </View>
     );
   };
-  
 
-  const Fotos = () => {
-    <View style={styles.containerCarousel}>
-      <TouchableOpacity onPress={goFoward}></TouchableOpacity>
-    </View>;
-  };
+  const Fotos = () => {};
 
   const Avaliacoes = () => {
     return (
@@ -109,7 +97,7 @@ const EventProfile = ({ route }) => {
         eventRating={route.params?.avaliacao}
       />
       <View style={styles.container}>
-        <Text style={styles.textEvent}>{route.params?.nome}</Text>
+        <Text style={styles.textEvent}>{nome}</Text>
       </View>
       <View style={styles.star}>
         <Icon name="star" size={20} style={styles.star1}>
